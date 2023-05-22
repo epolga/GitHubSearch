@@ -20,14 +20,9 @@ namespace GitHubSearch.API
         [Route("bookmark/{name}")]
         public async Task<IActionResult> SetBookmark([FromRoute]string name, [FromQuery] string result)
         {
-            var res = HttpContext.Session.GetString(name);
             HttpContext.Session.SetString(name, result);
             
-          
-            if (res == null)
-            {
-                return NotFound();
-            }
+           
             return Ok("OK");
         }
     }
