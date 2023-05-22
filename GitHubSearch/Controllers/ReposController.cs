@@ -15,7 +15,7 @@ namespace GitHubSearch.Controllers
         {
             var client = new GitHubClient(new ProductHeaderValue("Olga"));
     
-            var credentials = new Credentials("epolga", "******", AuthenticationType.Basic);
+            var credentials = new Credentials("epolga", "cueryuc3141", AuthenticationType.Basic);
             var result = await client.Search.SearchRepo(new SearchRepositoriesRequest(name));
             
             

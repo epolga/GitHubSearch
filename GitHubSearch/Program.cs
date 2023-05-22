@@ -23,13 +23,20 @@ namespace GitHubSearch
 
             builder.Services.AddDistributedMemoryCache();
 
-            // app.UseSession();
-            // builder.Services.AddMvc().SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_2_2);
+            
+            app.UseCors(x => x
+          .AllowAnyOrigin()
+          .AllowAnyMethod()
+          .AllowAnyHeader());
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
 
             app.UseAuthorization();
+
+
+
 
             app.MapControllerRoute(
                 name: "default",
