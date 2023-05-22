@@ -1,0 +1,82 @@
+﻿@model IEnumerable<GitHubSearch.Models.Repo>
+
+@{
+    ViewData["Title"] = "Repos";
+}
+
+
+<form class="form-search">
+    <div class="input-append">
+        <input type="text" id="txtName" class="span2 search-query">
+        <input type="button" id="btnGet" value="Search" />
+    </div>
+</form>
+
+<h1>Repos</h1>
+
+ 
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Avatar)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                     <img src=@Url.Content(item.Avatar) width="50" height="50">
+             
+            </td>
+            <td>                    
+
+                    <input type="button" id="btnGet" value="Bookmark"
+                           onclick="bookmark('ID' + @item.Id, '@item.Url')" />
+                
+              </td>
+        </tr>
+}
+    </tbody>
+</table>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript">
+     
+    $(function () {
+        $("#btnGet").click(function () {
+            window.location = '/repos?name=' + $("#txtName").val()
+        })
+    });
+
+    function bookmark(id, result)
+    {
+       $.ajax({
+                type: "POST",
+                url: "/api/github/bookmark/" + id + "?result=" + result,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (response) {
+                    alert('OK')
+                },
+                failure: function (response) {
+                },
+                error: function (response) {
+                }
+            });
+    }
+    
+</script>

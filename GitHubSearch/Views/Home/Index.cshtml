@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<form class="form-search">
+    <div class="input-append">
+        <input type="text" id="txtName" class="span2 search-query">
+         
+        <input type="button" id="btnGet"  value="Search" />
+    </div>
+</form>
+
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#btnGet").click(function (){
+            window.location = '/repos?name=' + $("#txtName").val()
+        })});
+    
+</script>
